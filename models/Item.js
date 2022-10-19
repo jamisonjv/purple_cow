@@ -3,7 +3,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 require('dotenv').config({path: '../.env'});
 
-console.log(process.env)
 // init ORM
 const sequelize = new Sequelize(
 	process.env.DB_NAME,
@@ -30,6 +29,9 @@ const Item = sequelize.define('Item', {
 	tableName: 'items',
 	timestamps: false // no need for timestamps
 });
+
+// sync sequelize ORM instance to database - will create table if doesn't already exist
+sequelize.sync({});
 
 // delete all items from set and replace with new set of items
 const replace_all = async (items) => {

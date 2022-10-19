@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cd test && jest",
-    "start": "node index.js",
-    "sync": "cd config && node sync_database.js"
+    "start": "node index.js"
   },
   "author": "Jamison JJ Vulopas",
   "license": "ISC",

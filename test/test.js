@@ -2,9 +2,9 @@
 
 const { Item, sequelize } = require('../models/Item');
 
-// sync model to database - will create table if doesn't already exist
+// sync model to database - will create table if doesn't already exist, else do nothing
 beforeAll(async () => {
-    await sequelize.sync({force: true});
+    await sequelize.sync({});
 });
 
 // post tests
