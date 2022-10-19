@@ -1,6 +1,11 @@
 // tests
 
-const { Item, sequelize } = require('../Item');
+const { Item, sequelize } = require('../models/Item');
+
+// sync model to database - will create table if doesn't already exist
+beforeAll(async () => {
+    await sequelize.sync({force: true});
+});
 
 // post tests
 
@@ -13,7 +18,7 @@ test('create single new item', async () => {
 
 
 test('create multiple new items', async () => {
-	expect.assertions(2);
+	expect.assertions(1);
 	await Item.bulkCreate([
 		{id: 'id_b', name: 'b'},
 		{id: 'id_c', name: 'c'},
@@ -62,7 +67,7 @@ test('delete single item given id', async () => {
 	expect(outp).toBeNull();
 });
 
-
+// close sequelize instance
 afterAll(async () => {
     await sequelize.close();
 });
