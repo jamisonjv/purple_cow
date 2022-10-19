@@ -3,6 +3,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 require('dotenv').config({path: '../.env'});
 
+console.log(process.env)
 // init ORM
 const sequelize = new Sequelize(
 	process.env.DB_NAME,
