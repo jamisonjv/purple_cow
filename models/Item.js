@@ -1,7 +1,8 @@
 // ORM model for Item
 
-const { Sequelize, DataTypes} = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 require('dotenv').config();
+const { replace_all } = require('./business_logic')
 
 // init ORM
 const sequelize = new Sequelize(
@@ -31,6 +32,9 @@ const Item = sequelize.define('Item', {
 
 // sync model to database - will create table if doesn't already exist
 Item.sync();
+
+// bind to Item model - static method so don't use prototype
+Item.replace_all = replace_all.bind(Item);
 
 // export access to database through Item model
 // export access to sequelize instance for testing purposess
