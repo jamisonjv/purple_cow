@@ -33,6 +33,8 @@ const Item = sequelize.define('Item', {
 Item.sync();
 
 // export access to database through Item model
+// export access to sequelize instance for testing purposess
 module.exports = {
-	Item: Item
+	Item: Item,
+	sequelize: sequelize
 }
