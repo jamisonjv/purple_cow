@@ -27,7 +27,8 @@ const Item = sequelize.define('Item', {
 		allowNull: false
 	}
 }, {
-	tableName: 'items'
+	tableName: 'items',
+	timestamps: false // no need for timestamps
 });
 
 // bind to Item model - static method so don't use prototype
