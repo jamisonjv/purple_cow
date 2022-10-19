@@ -2,7 +2,6 @@
 
 const { Sequelize, DataTypes } = require('sequelize');
 require('dotenv').config({path: '../.env'});
-const { replace_all } = require('./business_logic')
 
 // init ORM
 const sequelize = new Sequelize(
@@ -31,7 +30,34 @@ const Item = sequelize.define('Item', {
 	timestamps: false // no need for timestamps
 });
 
-// bind to Item model - static method so don't use prototype
+// delete all items from set and replace with new set of items
+const replace_all = async (items) => {
+	// since multi-part query, establish transaction in case certain element fails; then can rollback
+	var transaction = await sequelize.transaction();
+	try {
+
+		// delete all
+		await Item.destroy({
+			truncate: true
+		}, {
+			transaction: transaction
+		});
+		
+		// bulk create
+		const output = await Item.bulkCreate(items, {
+			transaction: transaction
+		});
+
+		// commit transaction
+		await transaction.commit();
+		return output;
+	} catch (err) {
+		await transaction.rollback();
+		throw (err);
+	}
+}
+
+// bind to Item model - static method so won't use prototype
 Item.replace_all = replace_all.bind(Item);
 
 // export access to database through Item model

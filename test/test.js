@@ -52,7 +52,8 @@ test('modify single item - update name for certain id', async () => {
 
 test('replace all items', async () => {
 	expect.assertions(2);
-	await Item.replace_all([{id: 'id_e', name: 'e'}]); // this one is user-defined function
+	const tmp = await Item.replace_all([{id: 'id_e', name: 'e'}]); // this one is user-defined function
+	console.log(tmp)
 	const outp = await Item.findAll();
 	expect(outp.length).toEqual(1);
 	expect(outp[0].id).toEqual('id_e');
@@ -63,7 +64,7 @@ test('replace all items', async () => {
 test('delete single item given id', async () => {
 	expect.assertions(1);
 	await Item.destroy({where: {id: 'id_e'}});
-	const outp = await Item.findByPk('id_a');
+	const outp = await Item.findByPk('id_e');
 	expect(outp).toBeNull();
 });
 
