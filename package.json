@@ -1,0 +1,17 @@
+{
+  "name": "project_purple_cow",
+  "version": "1.0.0",
+  "description": "Jamison JJ Vulopas project purple cow submission",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Jamison JJ Vulopas",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "sequelize": "^6.25.3"
+  }
+}
